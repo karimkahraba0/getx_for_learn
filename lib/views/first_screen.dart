@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:getx_learning/view_model/language_view_model.dart';
 import 'package:getx_learning/views/second_screen.dart';
 
 class FirstScreen extends StatefulWidget {
@@ -8,7 +9,6 @@ class FirstScreen extends StatefulWidget {
 }
 
 class _FirstScreenState extends State<FirstScreen> {
-  String _selectedLang = 'en';
 
   @override
   Widget build(BuildContext context) {
@@ -17,29 +17,27 @@ class _FirstScreenState extends State<FirstScreen> {
       body: Container(
         width: MediaQuery.of(context).size.width,
         padding: EdgeInsets.all(20.0),
-        child: Directionality(
-          textDirection: _selectedLang == 'en' ? TextDirection.ltr : TextDirection.rtl,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                'Login'.tr,
-                style: TextStyle(fontSize: 35),
-              ),
-              SizedBox(height: 50),
-              Text(
-                'SignUp'.tr,
-                style: TextStyle(fontSize: 35),
-              ),
-              DropdownButton(
-                value: _selectedLang,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              'Login'.tr,
+              style: TextStyle(fontSize: 35),
+            ),
+            SizedBox(height: 50),
+            Text(
+              'SignUp'.tr,
+              style: TextStyle(fontSize: 35),
+            ),
+            GetBuilder<AppLanguage>(
+              init: AppLanguage(),
+              builder: (controller)=> DropdownButton(
+                value: controller.appLocale,
                 onChanged: (value) {
-                  setState(() {
-                    _selectedLang = value;
-                  });
+                  controller.changeLanguage(value);
                   /// to make update in language by getx
-                  Get.updateLocale(Locale(_selectedLang));
+                  Get.updateLocale(Locale(value));
                 },
                 items: [
                   DropdownMenuItem(
@@ -52,20 +50,20 @@ class _FirstScreenState extends State<FirstScreen> {
                   ),
                 ],
               ),
-              SizedBox(height: 50),
-              Container(
-                child: RaisedButton(
-                  onPressed: () {
-                    /// Default route
-                    //Navigator.push(context, MaterialPageRoute(builder: (context)=> SecondScreen()));
-                    /// Getx route
-                    Get.to(SecondScreen());
-                  },
-                  child: Text("Click Me!"),
-                ),
+            ),
+            SizedBox(height: 50),
+            Container(
+              child: RaisedButton(
+                onPressed: () {
+                  /// Default route
+                  //Navigator.push(context, MaterialPageRoute(builder: (context)=> SecondScreen()));
+                  /// Getx route
+                  Get.to(SecondScreen());
+                },
+                child: Text("Click Me!"),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
