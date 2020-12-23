@@ -14,52 +14,58 @@ class _FirstScreenState extends State<FirstScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.yellow,
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              'Login'.tr,
-              style: TextStyle(fontSize: 35),
-            ),
-            SizedBox(height: 50),
-            Text(
-              'SignUp'.tr,
-              style: TextStyle(fontSize: 35),
-            ),
-            DropdownButton(
-              value: _selectedLang,
-              onChanged: (value) {
-                setState(() {
-                  _selectedLang = value;
-                });
-                /// to make update in language by getx
-                Get.updateLocale(Locale(_selectedLang));
-              },
-              items: [
-                DropdownMenuItem(
-                  child: Text('en'),
-                  value: 'en',
-                ),
-                DropdownMenuItem(
-                  child: Text('ar'),
-                  value: 'ar',
-                ),
-              ],
-            ),
-            SizedBox(height: 50),
-            Container(
-              child: RaisedButton(
-                onPressed: () {
-                  /// Default route
-                  //Navigator.push(context, MaterialPageRoute(builder: (context)=> SecondScreen()));
-                  /// Getx route
-                  Get.to(SecondScreen());
-                },
-                child: Text("Click Me!"),
+      body: Container(
+        width: MediaQuery.of(context).size.width,
+        padding: EdgeInsets.all(20.0),
+        child: Directionality(
+          textDirection: _selectedLang == 'en' ? TextDirection.ltr : TextDirection.rtl,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                'Login'.tr,
+                style: TextStyle(fontSize: 35),
               ),
-            ),
-          ],
+              SizedBox(height: 50),
+              Text(
+                'SignUp'.tr,
+                style: TextStyle(fontSize: 35),
+              ),
+              DropdownButton(
+                value: _selectedLang,
+                onChanged: (value) {
+                  setState(() {
+                    _selectedLang = value;
+                  });
+                  /// to make update in language by getx
+                  Get.updateLocale(Locale(_selectedLang));
+                },
+                items: [
+                  DropdownMenuItem(
+                    child: Text('en'),
+                    value: 'en',
+                  ),
+                  DropdownMenuItem(
+                    child: Text('ar'),
+                    value: 'ar',
+                  ),
+                ],
+              ),
+              SizedBox(height: 50),
+              Container(
+                child: RaisedButton(
+                  onPressed: () {
+                    /// Default route
+                    //Navigator.push(context, MaterialPageRoute(builder: (context)=> SecondScreen()));
+                    /// Getx route
+                    Get.to(SecondScreen());
+                  },
+                  child: Text("Click Me!"),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
