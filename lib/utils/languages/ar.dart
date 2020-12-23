@@ -1,4 +1,4 @@
 const Map<String, String> ar = {
-  'login': 'تسجيل دخول',
+  'Login': 'تسجيل دخول',
   'SignUp': 'تسجيل حساب جديد',
 };

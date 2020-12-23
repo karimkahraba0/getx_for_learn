@@ -19,12 +19,12 @@ class _FirstScreenState extends State<FirstScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              'Login',
+              'Login'.tr,
               style: TextStyle(fontSize: 35),
             ),
             SizedBox(height: 50),
             Text(
-              'SignUp',
+              'SignUp'.tr,
               style: TextStyle(fontSize: 35),
             ),
             DropdownButton(
@@ -33,6 +33,8 @@ class _FirstScreenState extends State<FirstScreen> {
                 setState(() {
                   _selectedLang = value;
                 });
+                /// to make update in language by getx
+                Get.updateLocale(Locale(_selectedLang));
               },
               items: [
                 DropdownMenuItem(
