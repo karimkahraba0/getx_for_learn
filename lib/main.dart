@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:getx_learning/translation.dart';
 import 'package:getx_learning/views/first_screen.dart';
 
 void main() {
@@ -14,9 +15,9 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Getx Package',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+      translations: Translation(),
+      locale: Locale('en'), /// Default language
+      fallbackLocale: Locale('en'), /// if there is an error in languages file
       home: FirstScreen(),
     );
   }
